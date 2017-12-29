@@ -1,0 +1,15 @@
+{
+  projectrc_version: '1.0.0',
+  contact_email: 'awmyhr@gmail.com',
+  contact_name: 'awmyhr',
+  email: 'awmyhr@gmail.com',
+  full_name: 'awmyhr',
+  project_home: 'https://github.com/awmyhr/docker-builders',
+  project_name: 'Build environments in a Docker Container',
+  project_slug: 'docker-builders',
+  project_abbr: 'dbuilders',
+  project_version: '1.0.0-rc',
+  software_copyright: '2017 awmyhr',
+  software_license: 'Apache-2.0'
+}
+

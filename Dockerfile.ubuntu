@@ -1,0 +1,39 @@
+# From template version: 1.0.0 (2017-03-03)
+# Author:    awmyhr
+# Created:   2017-12-28
+# Project:   docker-builders
+# Copyright: 2017, awmyhr
+# License:   Apache-2.0
+FROM ubuntu:latest
+
+ENV container=docker \
+    PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+RUN apt-get update -qy \
+    && apt-get upgrade -qy \
+    && apt-get dist-upgrade -qy
+
+RUN apt-get install -qy \
+        git \
+        automake \
+        autoconf \
+        cmake \
+        build-essential \
+        libboost-dev \
+        libboost-all-dev \
+        libssl-dev \
+        pkg-config \
+        bsdmainutils
+
+CMD ["/bin/bash"]
+
+LABEL org.label-schema.name="awmyhr/builders:ubuntu" \
+      org.label-schema.vendor="awmyhr <awmyhr@gmail.com>" \
+      org.label-schema.version="0.1.0-alpha" \
+      org.label-schema.release="2017-12-27" \
+      org.label-schema.url="TODO: CHANGEME" \
+      org.label-schema.vcs-type="git" \
+      org.label-schema.vcs-url="TODO: CHANGEME" \
+      org.label-schema.summary="Build environment based on Ubuntu." \
+      org.label-schema.description="Build environment based on Ubuntu." \
+      org.label-schema.schema-version='1.0.0-rc.1'
