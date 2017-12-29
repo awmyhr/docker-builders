@@ -1,0 +1,34 @@
+# From template version: 1.0.0 (2017-03-03)
+# Author:    awmyhr
+# Created:   2017-12-28
+# Project:   Build environments in a Docker Container
+# Copyright: 2017 awmyhr
+# License:   Apache-2.0
+FROM alpine:latest
+
+ENV container=docker \
+    LANG=C.UTF-8 \
+    PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+RUN apk update \
+    && apk upgrade \
+    && apk add \
+        alpine-sdk \
+        bash \
+        boost-dev \
+        cmake \
+        icu-libs \
+        libgc++
+
+CMD ["/bin/bash"]
+
+LABEL org.label-schema.name="Build environments in a Docker Container" \
+      org.label-schema.vendor="awmyhr <awmyhr@gmail.com" \
+      org.label-schema.version="1.0.0-alpha" \
+      org.label-schema.release="2017-12-28" \
+      org.label-schema.url="https://github.com/awmyhr/docker-builders" \
+      org.label-schema.vcs-type="git" \
+      org.label-schema.vcs-url="https://github.com/awmyhr/docker-builders" \
+      org.label-schema.summary="Alpine build environment." \
+      org.label-schema.description="Alpine build environment." \
+      org.label-schema.schema-version='1.0.0-rc.1'

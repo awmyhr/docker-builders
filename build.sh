@@ -22,7 +22,7 @@ docker build -t "${BASE_NAME}:ubuntu" . -f Dockerfile.ubuntu
 #-------------------------------------------------------------------------------
 #-- Alpine Build Container
 #-------------------------------------------------------------------------------
-# printf 'Building %s...\n' "${BASE_NAME}:alpine"
+printf 'Building %s...\n' "${BASE_NAME}:alpine"
 
-# docker build -t "${BASE_NAME}:alpine" . -f Dockerfile.alpine
+docker build -t "${BASE_NAME}:alpine" . -f Dockerfile.alpine
 
