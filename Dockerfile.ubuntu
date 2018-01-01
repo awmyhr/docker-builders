@@ -10,30 +10,32 @@ ENV container=docker \
     PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 RUN apt-get update -qy \
-    && apt-get upgrade -qy \
-    && apt-get dist-upgrade -qy
-
-RUN apt-get install -qy \
-        git \
-        automake \
+    && apt-get install -qy \
+        ack-grep \
         autoconf \
-        cmake \
+        automake \
+        autotools-dev \
+        bsdmainutils \
         build-essential \
-        libboost-dev \
+        cmake \
+        git \
         libboost-all-dev \
+        libboost-dev \
         libssl-dev \
+        libtool \
         pkg-config \
-        bsdmainutils
+        software-properties-common \
+        vim
 
 CMD ["/bin/bash"]
 
 LABEL org.label-schema.name="awmyhr/builders:ubuntu" \
       org.label-schema.vendor="awmyhr <awmyhr@gmail.com>" \
-      org.label-schema.version="0.1.0-alpha" \
-      org.label-schema.release="2017-12-27" \
-      org.label-schema.url="TODO: CHANGEME" \
+      org.label-schema.version="1.1.0" \
+      org.label-schema.release="2018-01-01" \
+      org.label-schema.url="https://hub.docker.com/r/awmyhr/builders/" \
       org.label-schema.vcs-type="git" \
-      org.label-schema.vcs-url="TODO: CHANGEME" \
+      org.label-schema.vcs-url="https://github.com/awmyhr/docker-builders" \
       org.label-schema.summary="Build environment based on Ubuntu." \
       org.label-schema.description="Build environment based on Ubuntu." \
       org.label-schema.schema-version='1.0.0-rc.1'
