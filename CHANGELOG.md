@@ -17,8 +17,12 @@ however the project itself uses date versioning.
 
 ## [Unreleased]
 ### Added
+- Additional packages for Ubuntu builder
+- Created Dockerfile.alpine
 
 ### Changed
+- build.sh no has switches to skip flavors
+- simplified vars in build.sh
 
 ### Deprecated
 
