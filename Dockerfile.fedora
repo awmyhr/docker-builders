@@ -1,0 +1,40 @@
+# From template version: 1.0.0 (2017-03-03)
+# Author:    awmyhr
+# Created:   2018-01-24
+# Project:   docker-builders
+# Copyright: 2018, awmyhr
+# License:   Apache-2.0
+FROM fedora:latest
+
+ENV container=docker \
+    PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+RUN dnf update -qy \
+    && dnf groups install -qy \
+        "C Development Tools and Libraries" \
+        "Development Tools" \
+    && dnf install -qy \
+        ack \
+        libbsd-devel \
+        cmake \
+        boost-devel \
+        miniupnpc-devel \
+        openssl-devel \
+        libtool \
+        mlocate \
+        vim-common
+
+CMD ["/bin/bash"]
+
+WORKDIR /root/
+
+LABEL org.label-schema.name="awmyhr/builders:ubuntu" \
+      org.label-schema.vendor="awmyhr <awmyhr@gmail.com>" \
+      org.label-schema.version="1.0.0" \
+      org.label-schema.release="2018-01-24" \
+      org.label-schema.url="https://hub.docker.com/r/awmyhr/builders/" \
+      org.label-schema.vcs-type="git" \
+      org.label-schema.vcs-url="https://github.com/awmyhr/docker-builders" \
+      org.label-schema.summary="Build environment based on Ubuntu." \
+      org.label-schema.description="Build environment based on Ubuntu." \
+      org.label-schema.schema-version='1.0.0-rc.1'

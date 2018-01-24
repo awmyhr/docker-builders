@@ -2,12 +2,23 @@
 #===============================================================================
 # Project:   docker-builders
 # Author:    Myhr, Andy
-# Revised:   2018-01-01
+# Revised:   2018-01-24
 # Created:   2017-12-28
 # Copyright: 2017, awmyhr
 # License:   Apache-2.0
 #===============================================================================
 PROJECT='awmyhr/builders'
+
+#-------------------------------------------------------------------------------
+#-- Fedora Build Container
+#-------------------------------------------------------------------------------
+if [ "${*#*--nofedora}" != "${*}" ]; then
+    printf 'Skipping Fedora.\n'
+else
+    printf 'Building %s...\n' "${PROJECT}:fedora"
+
+    docker build -t "${PROJECT}:fedora" . -f Dockerfile.fedora
+fi
 
 #-------------------------------------------------------------------------------
 #-- Ubuntu Build Container
