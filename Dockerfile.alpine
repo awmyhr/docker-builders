@@ -13,19 +13,26 @@ ENV container=docker \
 RUN apk update \
     && apk upgrade \
     && apk add \
+        ack \
         alpine-sdk \
+        autoconf \
+        automake \
         bash \
         boost-dev \
+        bsd-compat-headers \
         cmake \
         icu-libs \
-        libgc++
+        libgc++ \
+        openssl-dev
 
 CMD ["/bin/bash"]
 
+WORKDIR /root/
+
 LABEL org.label-schema.name="Build environments in a Docker Container" \
       org.label-schema.vendor="awmyhr <awmyhr@gmail.com" \
-      org.label-schema.version="1.0.0-alpha" \
-      org.label-schema.release="2017-12-28" \
+      org.label-schema.version="1.1.0" \
+      org.label-schema.release="2018-01-23" \
       org.label-schema.url="https://github.com/awmyhr/docker-builders" \
       org.label-schema.vcs-type="git" \
       org.label-schema.vcs-url="https://github.com/awmyhr/docker-builders" \
