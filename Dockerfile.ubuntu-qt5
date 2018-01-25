@@ -1,0 +1,27 @@
+# From template version: 1.0.0 (2017-03-03)
+# Author:    awmyhr
+# Created:   2018-01-25
+# Project:   docker-builders
+# Copyright: 2017, awmyhr
+# License:   Apache-2.0
+FROM awmyhr/builders:ubuntu
+
+RUN apt-get install -qy \
+        libqt5gui5 \
+        libqt5core5 \
+        libqt5dbus5 \
+        qttools5-dev \
+        qttools5-dev-tools \
+        libprotobuf-dev \
+        libqrencode-dev
+
+LABEL org.label-schema.name="awmyhr/builders:ubuntu-qt5" \
+      org.label-schema.vendor="awmyhr <awmyhr@gmail.com>" \
+      org.label-schema.version="1.0.0" \
+      org.label-schema.release="2018-01-25" \
+      org.label-schema.url="https://hub.docker.com/r/awmyhr/builders/" \
+      org.label-schema.vcs-type="git" \
+      org.label-schema.vcs-url="https://github.com/awmyhr/docker-builders" \
+      org.label-schema.summary="Build environment based on Ubuntu." \
+      org.label-schema.description="Build environment based on Ubuntu." \
+      org.label-schema.schema-version='1.0.0-rc.1'
