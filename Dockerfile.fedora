@@ -22,7 +22,8 @@ RUN dnf update -qy \
         openssl-devel \
         libtool \
         mlocate \
-        vim-common
+        vim-common \
+        wget
 
 CMD ["/bin/bash"]
 
@@ -30,8 +31,8 @@ WORKDIR /root/
 
 LABEL org.label-schema.name="awmyhr/builders:fedora" \
       org.label-schema.vendor="awmyhr <awmyhr@gmail.com>" \
-      org.label-schema.version="1.0.0" \
-      org.label-schema.release="2018-01-24" \
+      org.label-schema.version="1.1.0" \
+      org.label-schema.release="2018-01-25" \
       org.label-schema.url="https://hub.docker.com/r/awmyhr/builders/" \
       org.label-schema.vcs-type="git" \
       org.label-schema.vcs-url="https://github.com/awmyhr/docker-builders" \
