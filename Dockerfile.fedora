@@ -9,6 +9,11 @@ FROM fedora:latest
 ENV container=docker \
     PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
+ARG USER=nobody
+ARG GROUP=$USER
+ARG SOURCE=/source
+ARG BUILD=/build
+
 RUN dnf update -qy \
     && dnf groups install -qy \
         "C Development Tools and Libraries" \
@@ -23,16 +28,22 @@ RUN dnf update -qy \
         libtool \
         mlocate \
         vim-common \
-        wget
+        wget \
+    && mkdir -p ${SOURCE} ${BUILD} \
+    && chown ${USER}:${GROUP} ${SOURCE} ${BUILD}
+
+USER ${USER}:${GROUP}
+
+VOLUME ["${SOURCE}", "${BUILD}"]
+
+WORKDIR ${SOURCE}
 
 CMD ["/bin/bash"]
 
-WORKDIR /root/
-
 LABEL org.label-schema.name="awmyhr/builders:fedora" \
       org.label-schema.vendor="awmyhr <awmyhr@gmail.com>" \
-      org.label-schema.version="1.1.0" \
-      org.label-schema.release="2018-01-25" \
+      org.label-schema.version="2.0.0" \
+      org.label-schema.release="2018-02-01" \
       org.label-schema.url="https://hub.docker.com/r/awmyhr/builders/" \
       org.label-schema.vcs-type="git" \
       org.label-schema.vcs-url="https://github.com/awmyhr/docker-builders" \

@@ -10,6 +10,11 @@ ENV container=docker \
     LANG=C.UTF-8 \
     PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
+ARG USER=nobody
+ARG GROUP=$USER
+ARG SOURCE=/source
+ARG BUILD=/build
+
 RUN apk update \
     && apk upgrade \
     && apk add \
@@ -23,16 +28,22 @@ RUN apk update \
         cmake \
         icu-libs \
         libgc++ \
-        openssl-dev
+        openssl-dev \
+    && mkdir -p ${SOURCE} ${BUILD} \
+    && chown ${USER}:${GROUP} ${SOURCE} ${BUILD}
+
+USER ${USER}:${GROUP}
+
+VOLUME ["${SOURCE}", "${BUILD}"]
+
+WORKDIR ${SOURCE}
 
 CMD ["/bin/bash"]
 
-WORKDIR /root/
-
 LABEL org.label-schema.name="Build environments in a Docker Container" \
       org.label-schema.vendor="awmyhr <awmyhr@gmail.com" \
-      org.label-schema.version="1.1.0" \
-      org.label-schema.release="2018-01-23" \
+      org.label-schema.version="2.0.0" \
+      org.label-schema.release="2018-02-01" \
       org.label-schema.url="https://github.com/awmyhr/docker-builders" \
       org.label-schema.vcs-type="git" \
       org.label-schema.vcs-url="https://github.com/awmyhr/docker-builders" \

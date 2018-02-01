@@ -9,6 +9,11 @@ FROM ubuntu:latest
 ENV container=docker \
     PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
+ARG USER=nobody
+ARG GROUP=nogroup
+ARG SOURCE=/source
+ARG BUILD=/build
+
 RUN apt-get update -qy \
     && apt-get install -qy \
         ack-grep \
@@ -28,16 +33,22 @@ RUN apt-get update -qy \
         pkg-config \
         software-properties-common \
         vim \
-        wget
+        wget \
+    && mkdir -p ${SOURCE} ${BUILD} \
+    && chown ${USER}:${GROUP} ${SOURCE} ${BUILD}
+
+USER ${USER}:${GROUP}
+
+VOLUME ["${SOURCE}", "${BUILD}"]
+
+WORKDIR ${SOURCE}
 
 CMD ["/bin/bash"]
 
-WORKDIR /root/
-
 LABEL org.label-schema.name="awmyhr/builders:ubuntu" \
       org.label-schema.vendor="awmyhr <awmyhr@gmail.com>" \
-      org.label-schema.version="1.4.0" \
-      org.label-schema.release="2018-01-25" \
+      org.label-schema.version="2.0.0" \
+      org.label-schema.release="2018-02-01" \
       org.label-schema.url="https://hub.docker.com/r/awmyhr/builders/" \
       org.label-schema.vcs-type="git" \
       org.label-schema.vcs-url="https://github.com/awmyhr/docker-builders" \
