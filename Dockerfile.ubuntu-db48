@@ -6,6 +6,8 @@
 # License:   Apache-2.0
 FROM awmyhr/builders:ubuntu
 
+USER root:root
+
 RUN wget 'http://download.oracle.com/berkeley-db/db-4.8.30.NC.tar.gz' \
     && echo '12edc0df75bf9abd7f82f821795bcee50f42cb2e5f76a6a281b85732798364ef  db-4.8.30.NC.tar.gz' | sha256sum -c \
     && tar -zxf db-4.8.30.NC.tar.gz \
@@ -17,10 +19,15 @@ RUN wget 'http://download.oracle.com/berkeley-db/db-4.8.30.NC.tar.gz' \
                          --with-mutex=POSIX/pthreads/library \
     && make install
 
+ARG USER=nobody
+ARG GROUP=nogroup
+
+USER ${USER}:${GROUP}
+
 LABEL org.label-schema.name="awmyhr/builders:ubuntu-db48" \
       org.label-schema.vendor="awmyhr <awmyhr@gmail.com>" \
       org.label-schema.version="2.0.0" \
-      org.label-schema.release="2018-01-25" \
+      org.label-schema.release="2018-02-02" \
       org.label-schema.url="https://hub.docker.com/r/awmyhr/builders/" \
       org.label-schema.vcs-type="git" \
       org.label-schema.vcs-url="https://github.com/awmyhr/docker-builders" \
