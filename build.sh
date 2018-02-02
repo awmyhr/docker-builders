@@ -2,53 +2,20 @@
 #===============================================================================
 # Project:   docker-builders
 # Author:    Myhr, Andy
-# Revised:   2018-01-24
+# Revised:   2018-02-01
 # Created:   2017-12-28
 # Copyright: 2017, awmyhr
 # License:   Apache-2.0
 #===============================================================================
 PROJECT='awmyhr/builders'
 
-#-------------------------------------------------------------------------------
-#-- Fedora Build Container
-#-------------------------------------------------------------------------------
-if [ "${*#*--nofedora}" != "${*}" ]; then
-    printf 'Skipping Fedora.\n'
-else
-    printf 'Building %s...\n' "${PROJECT}:fedora"
+for FILE in Dockerfile.* ; do
+    TAG=$(echo "${FILE}" | cut -d'.' -f2)
+    if [ "${*#*--no${TAG}}" != "${*}" ]; then
+        printf 'Skipping %s.\n' "${PROJECT}:${TAG}"
+    else
+        printf 'Building %s...\n' "${PROJECT}:${TAG}"
 
-    docker build -t "${PROJECT}:fedora" . -f Dockerfile.fedora
-fi
-
-#-------------------------------------------------------------------------------
-#-- Ubuntu Build Container
-#-------------------------------------------------------------------------------
-if [ "${*#*--noubuntu}" != "${*}" ]; then
-    printf 'Skipping Ubuntu.\n'
-else
-    printf 'Building %s...\n' "${PROJECT}:ubuntu"
-
-    docker build -t "${PROJECT}:ubuntu" . -f Dockerfile.ubuntu
-fi
-
-#-------------------------------------------------------------------------------
-#-- Ubuntu w/DB4.8 Build Container
-#-------------------------------------------------------------------------------
-if [ "${*#*--noubuntudb48}" != "${*}" ]; then
-    printf 'Skipping Ubuntu w/DB4.8.\n'
-else
-    printf 'Building %s...\n' "${PROJECT}:ubuntu-db48"
-
-    docker build -t "${PROJECT}:ubuntu-db48" . -f Dockerfile.ubuntu-db48
-fi
-
-#-------------------------------------------------------------------------------
-#-- Alpine Build Container
-#-------------------------------------------------------------------------------
-if [ "${*#*--noalpine}" != "${*}" ]; then
-    printf 'Skipping Alpine.\n'
-else
-    printf 'Building %s...\n' "${PROJECT}:alpine"
-
-    docker build -t "${PROJECT}:alpine" . -f Dockerfile.alpine
-fi
+        docker build -t "${PROJECT}:${TAG}" . -f "${FILE}"
+    fi
+done
