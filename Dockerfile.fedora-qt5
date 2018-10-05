@@ -6,16 +6,23 @@
 # License:   Apache-2.0
 FROM awmyhr/builders:fedora
 
+USER root:root
+
 RUN dnf install -qy \
         dbusmenu-qt5-devel \
         qt5-devel \
         protobuf-devel \
         qrencode-devel
 
+ARG USER=nobody
+ARG GROUP=$USER
+
+USER ${USER}:${GROUP}
+
 LABEL org.label-schema.name="awmyhr/builders:fedora-qt5" \
       org.label-schema.vendor="awmyhr <awmyhr@gmail.com>" \
       org.label-schema.version="1.0.0" \
-      org.label-schema.release="2018-01-25" \
+      org.label-schema.release="2018-02-02" \
       org.label-schema.url="https://hub.docker.com/r/awmyhr/builders/" \
       org.label-schema.vcs-type="git" \
       org.label-schema.vcs-url="https://github.com/awmyhr/docker-builders" \
